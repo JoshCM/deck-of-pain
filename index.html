@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deck of Fitness</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .red-card {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock max-w-sm font-sans font-extrabold text-5xl text-center uppercase mt-6 mb-2 mx-auto">Deck of <span class="pain text-8xl">Pain</span></div>
+  <div class="clock w-full font-sans font-extrabold text-6xl text-center mb-2">02:20<span class="red-dot text-red-400">.</span><span>8</span></div>
+  <div class="red-card card h-96 border-8 border-black rounded-xl max-w-xs mx-auto text-center text-9xl tracking-tighter font-extrabold flex justify-center items-center">
+    <div class="red-card">A&hearts;</div>
+  </div>
+  <div class="controlls max-w-xs mx-auto flex justify-center my-6">
+    <button type="button" class="btn-primary transition w-32 ease-in-out focus:outline-none focus:shadow-outline bg-black text-white font-bold tracking-tighter text-lg uppercase py-2 px-4 mr-3 rounded">Start</button>
+    <button type="button" class="btn-primary transition w-32 ease-in-out focus:outline-none focus:shadow-outline bg-black text-white font-bold tracking-tighter text-lg uppercase py-2 px-4 rounded">Reset</button>
+  </div>
+</body>
+<script type="text/javascript">
+  const CARD_COLORS = ['&spades;','&clubs;', '&diams;', '&hearts;']
+  const CARD_VALUES = [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+  let cardDeck = []
+
+  function reset () {
+    cardDeck = []
+    for (const color of CARD_COLORS) {
+      for (const value of CARD_VALUES) {
+        cardDeck.push(value + color)
+      }
+    }
+  }
+
+  reset()
+  console.log(cardDeck)
+</script>
+</html>
