@@ -17,6 +17,10 @@
     .card {
       cursor: pointer;
     }
+
+    button:disabled {
+      opacity: 50%;
+    }
   </style>
 </head>
 
@@ -101,11 +105,11 @@
   }
 
   function reset () {
-    isRunning = false
     resetCardDeck()
     nextCard()
     resetClock()
-    console.log('RESET')
+    $START_BTN.prop('disabled', false)
+    isRunning = false
   }
 
   function start () {
@@ -114,6 +118,7 @@
     } else {
       isRunning = true
       startClock()
+      $START_BTN.prop('disabled', true)
     }
   }
 
