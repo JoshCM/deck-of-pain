@@ -23,7 +23,7 @@
 <body>
   <div class="clock max-w-sm font-sans font-extrabold text-5xl text-center uppercase mt-6 mb-2 mx-auto">Deck of <span
       class="pain text-8xl">Pain</span></div>
-  <div class="clock w-full font-sans font-extrabold text-6xl text-center mb-2"><span class="time">02:20</span><span
+  <div class="clock w-full font-sans font-extrabold text-6xl text-center font-mono mb-2"><span class="time">02:20</span><span
       class="red-dot text-red-400">.</span><span class="millis">8</span></div>
   <div
     class="card h-96 border-8 border-black rounded-xl max-w-xs mx-auto text-center text-9xl tracking-tighter font-extrabold flex justify-center items-center">
@@ -48,7 +48,7 @@
   let isRunning = true
   let cardDeck = []
   let time = WORKOUT_DURATION_IN_MILLIS
-  let tick = null
+  let intervalID = null
 
   /**
  * Shuffles array in place. ES6 version
@@ -76,22 +76,28 @@
   function setClock () {
     let minutes =  Math.floor(time / 1000 / 60)
     let seconds = Math.floor(time / 1000 % 60)
-    let millis = Math.floor(time /10000)
+    let millis = Math.floor(time % 1000) / 100
     $('.time').text(`${minutes}:${seconds}`)
     $('.millis').text(`${millis}`)
   }
 
   function resetClock () {
-    clearInterval(tick)
+    clearInterval(intervalID)
     time = WORKOUT_DURATION_IN_MILLIS
     setClock()
   }
 
+  function tick () {
+    time -= TICK_INTERVAL
+    if (time <= 0) {
+      reset()
+      return
+    }
+    setClock() 
+  }
+
   function startClock () {
-    tick = setInterval(() => {
-      time -= TICK_INTERVAL
-      setClock()
-    }, TICK_INTERVAL)
+    intervalID = setInterval(tick, TICK_INTERVAL)
   }
 
   function reset () {
