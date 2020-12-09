@@ -101,16 +101,20 @@
   }
 
   function reset () {
+    isRunning = false
     resetCardDeck()
     nextCard()
     resetClock()
-    isRunning = false
     console.log('RESET')
   }
 
   function start () {
-    isRunning = true
-    startClock()
+    if (isRunning) {
+      return
+    } else {
+      isRunning = true
+      startClock()
+    }
   }
 
   function nextCard () {
